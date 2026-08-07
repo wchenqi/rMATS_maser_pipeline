@@ -370,11 +370,19 @@
     batch_gene_specific <- function(cache,
                                     maser_obj = NULL,
                                     gene_list,
-                                    outdir_gene,
+                                    outdir,
                                     gtf_path = NULL,
                                     event_types = c("SE","A3SS","A5SS","RI","MXE"),
                                     verbose = TRUE,
                                     generate_sashimi = FALSE) {
+                ## 建立新文件夹
+                outdir_gene <- file.path(outdir,"04GeneSpecific")
+                if(!file.exists(outdir_gene)){
+                    print("make new dir!")
+                    dir.create(outdir_gene,recursive=TRUE)
+                }
+                cat("输出结果存储在：",outdir_gene,"\n")
+                ## 基因列表
                 genes <- unlist(strsplit(gene_list, ","))
                 genes <- trimws(genes)
                 
